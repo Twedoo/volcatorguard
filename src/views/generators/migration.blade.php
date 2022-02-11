@@ -14,12 +14,18 @@ class StoneGuardSetupTables extends Migration
     {
         DB::beginTransaction();
 
+
         Schema::create('{{ $usersTable }}', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('code');
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('genre')->nullable();
+            $table->string('date')->nullable();
+            $table->string('avatar')->nullable();
+            $table->string('statut')->nullable();
+            $table->string('type')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -30,6 +36,7 @@ class StoneGuardSetupTables extends Migration
             $table->string('name')->unique();
             $table->string('display_name')->nullable();
             $table->string('description')->nullable();
+            $table->string('id_creator')->nullable();
             $table->timestamps();
         });
 
@@ -39,9 +46,9 @@ class StoneGuardSetupTables extends Migration
             $table->integer('role_id')->unsigned();
 
             $table->foreign('user_id')->references('{{ $userKeyName }}')->on('{{ $usersTable }}')
-                ->onUpdate('cascade')->onDelete('cascade');
+            ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('role_id')->references('id')->on('{{ $rolesTable }}')
-                ->onUpdate('cascade')->onDelete('cascade');
+            ->onUpdate('cascade')->onDelete('cascade');
 
             $table->primary(['user_id', 'role_id']);
         });
@@ -50,20 +57,21 @@ class StoneGuardSetupTables extends Migration
         Schema::create('{{ $permissionsTable }}', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
+            $table->string('id_module')->nullable();
             $table->string('display_name')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
         });
 
         // Create table for associating permissions to roles (Many-to-Many)
-        Schema::create('{{ $permissionRoleTable }}', function (Blueprint $table) {
+            Schema::create('{{ $permissionRoleTable }}', function (Blueprint $table) {
             $table->integer('permission_id')->unsigned();
             $table->integer('role_id')->unsigned();
 
             $table->foreign('permission_id')->references('id')->on('{{ $permissionsTable }}')
-                ->onUpdate('cascade')->onDelete('cascade');
+            ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('role_id')->references('id')->on('{{ $rolesTable }}')
-                ->onUpdate('cascade')->onDelete('cascade');
+            ->onUpdate('cascade')->onDelete('cascade');
 
             $table->primary(['permission_id', 'role_id']);
         });

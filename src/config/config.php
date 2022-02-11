@@ -5,10 +5,94 @@
  * a role & permission management solution for Laravel.
  *
  * @license MIT
- * @package Twedoo\StoneGuard
+ * @package Twedoo\Stone
  */
 
 return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Stone Module Model
+    |--------------------------------------------------------------------------
+    |
+    | This is the Module model used by Stone to create correct relations. Update
+    | the module if it is in a different namespace.
+    |
+    */
+    'module' => 'Twedoo\Stone\InstallerModule\Models\modules',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Stone Modules Table
+    |--------------------------------------------------------------------------
+    |
+    | This is the modules table used by Stone to save roles to the database.
+    |
+    */
+    'modules_table' => 'modules',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Stone Parameter Model
+    |--------------------------------------------------------------------------
+    |
+    | This is the Parameter model used by Stone to create correct relations. Update
+    | the parameter if it is in a different namespace.
+    |
+    */
+    'parameters' => 'Twedoo\Stone\Models\Parameters',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Stone Parameters Table
+    |--------------------------------------------------------------------------
+    |
+    | This is the parameters table used by Stone to save roles to the database.
+    |
+    */
+    'parameters_table' => 'parameters',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Stone Menuback Model
+    |--------------------------------------------------------------------------
+    |
+    | This is the Menuback model used by Stone to create correct relations. Update
+    | the menuback if it is in a different namespace.
+    |
+    */
+    'menuback' => 'Twedoo\Stone\Models\Menuback',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Stone Menubacks Table
+    |--------------------------------------------------------------------------
+    |
+    | This is the menubacks table used by Stone to save roles to the database.
+    |
+    */
+    'menubacks_table' => 'menubacks',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Stone Language Model
+    |--------------------------------------------------------------------------
+    |
+    | This is the Language model used by Stone to create correct relations. Update
+    | the Language if it is in a different namespace.
+    |
+    */
+    'Language' => 'Twedoo\Stone\Models\Languages',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Stone Language Table
+    |--------------------------------------------------------------------------
+    |
+    | This is the languages table used by Stone to save roles to the database.
+    |
+    */
+    'languages_table' => 'languages',
 
     /*
     |--------------------------------------------------------------------------
@@ -19,7 +103,7 @@ return [
     | the role if it is in a different namespace.
     |
     */
-    'role' => 'Twedoo\Stone\Models\Role',
+    'role' => 'Twedoo\StoneGuard\Models\Role',
 
     /*
     |--------------------------------------------------------------------------
@@ -95,7 +179,7 @@ return [
     | Update the permission if it is in a different namespace.
     |
     */
-    'permission' => 'Twedoo\Stone\Models\Permission',
+    'permission' => 'Twedoo\StoneGuard\Models\Permission',
 
     /*
     |--------------------------------------------------------------------------

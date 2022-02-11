@@ -19,7 +19,7 @@ trait StoneGuardPermissionTrait
      */
     public function roles()
     {
-        return $this->belongsToMany(Config::get('stoneGuard.role'), Config::get('stoneGuard.permission_role_table'), Config::get('stoneGuard.permission_foreign_key'), Config::get('stoneGuard.role_foreign_key'));
+        return $this->belongsToMany(Config::get('stone.role'), Config::get('stone.permission_role_table'), Config::get('stone.permission_foreign_key'), Config::get('stone.role_foreign_key'));
     }
 
     /**
@@ -34,7 +34,7 @@ trait StoneGuardPermissionTrait
         parent::boot();
 
         static::deleting(function($permission) {
-            if (!method_exists(Config::get('stoneGuard.permission'), 'bootSoftDeletes')) {
+            if (!method_exists(Config::get('stone.permission'), 'bootSoftDeletes')) {
                 $permission->roles()->sync([]);
             }
 

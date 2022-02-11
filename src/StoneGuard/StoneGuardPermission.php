@@ -32,7 +32,7 @@ class StoneGuardPermission extends Model implements StoneGuardPermissionInterfac
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->table = Config::get('stoneGuard.permissions_table');
+        $this->table = Config::get('stone.permissions_table');
     }
 
 }

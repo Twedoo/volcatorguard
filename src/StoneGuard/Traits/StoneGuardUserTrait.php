@@ -26,7 +26,7 @@ trait StoneGuardUserTrait
         $userPrimaryKey = $this->primaryKey;
         $cacheKey = 'stoneGuard_roles_for_user_'.$this->$userPrimaryKey;
         if(Cache::getStore() instanceof TaggableStore) {
-            return Cache::tags(Config::get('stoneGuard.role_user_table'))->remember($cacheKey, Config::get('cache.ttl'), function () {
+            return Cache::tags(Config::get('stone.role_user_table'))->remember($cacheKey, Config::get('cache.ttl'), function () {
                 return $this->roles()->get();
             });
         }
@@ -39,7 +39,7 @@ trait StoneGuardUserTrait
     public function save(array $options = [])
     {   //both inserts and updates
         if(Cache::getStore() instanceof TaggableStore) {
-            Cache::tags(Config::get('stoneGuard.role_user_table'))->flush();
+            Cache::tags(Config::get('stone.role_user_table'))->flush();
         }
         return parent::save($options);
     }
@@ -51,7 +51,7 @@ trait StoneGuardUserTrait
     {   //soft or hard
         $result = parent::delete($options);
         if(Cache::getStore() instanceof TaggableStore) {
-            Cache::tags(Config::get('stoneGuard.role_user_table'))->flush();
+            Cache::tags(Config::get('stone.role_user_table'))->flush();
         }
         return $result;
     }
@@ -63,7 +63,7 @@ trait StoneGuardUserTrait
     {   //soft delete undo's
         $result = parent::restore();
         if(Cache::getStore() instanceof TaggableStore) {
-            Cache::tags(Config::get('stoneGuard.role_user_table'))->flush();
+            Cache::tags(Config::get('stone.role_user_table'))->flush();
         }
         return $result;
     }
@@ -75,7 +75,7 @@ trait StoneGuardUserTrait
      */
     public function roles()
     {
-        return $this->belongsToMany(Config::get('stoneGuard.role'), Config::get('stoneGuard.role_user_table'), Config::get('stoneGuard.user_foreign_key'), Config::get('stoneGuard.role_foreign_key'));
+        return $this->belongsToMany(Config::get('stone.role'), Config::get('stone.role_user_table'), Config::get('stone.user_foreign_key'), Config::get('stone.role_foreign_key'));
     }
 
     /**

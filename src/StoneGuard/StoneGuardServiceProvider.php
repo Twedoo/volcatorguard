@@ -28,11 +28,11 @@ class StoneGuardServiceProvider extends ServiceProvider
     {
         // Publish config files
         $this->publishes([
-            __DIR__.'/../config/config.php' => app()->basePath() . '/config/stoneGuard.php',
+            __DIR__.'/../config/config.php' => app()->basePath() . '/config/stone.php',
         ]);
 
         // Register commands
-        $this->commands('command.stoneGuard.migration');
+        $this->commands('command.stone.migration.guard');
 
         // Register blade directives
         $this->bladeDirectives();
@@ -110,7 +110,7 @@ class StoneGuardServiceProvider extends ServiceProvider
      */
     private function registerCommands()
     {
-        $this->app->singleton('command.stoneGuard.migration', function ($app) {
+        $this->app->singleton('command.stone.migration.guard', function ($app) {
             return new MigrationCommand();
         });
     }
@@ -123,7 +123,7 @@ class StoneGuardServiceProvider extends ServiceProvider
     private function mergeConfig()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/config.php', 'stoneGuard'
+            __DIR__.'/../config/config.php', 'stone'
         );
     }
 
@@ -135,7 +135,38 @@ class StoneGuardServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            'command.stoneGuard.migration'
+            'command.stone.migration.guard'
         ];
+    }
+
+    /**
+     * Console-specific booting.
+     *
+     * @return void
+     */
+    protected function bootForConsole(): void
+    {
+        // Publishing the configuration file.
+        $this->publishes([
+            __DIR__.'/../config/stone.php' => config_path('stone.php'),
+        ], 'stone.config');
+
+        // Publishing the views.
+        /*$this->publishes([
+            __DIR__.'/../resources/views' => base_path('resources/views/vendor/twedoo'),
+        ], 'stone.views');*/
+
+        // Publishing assets.
+        /*$this->publishes([
+            __DIR__.'/../resources/assets' => public_path('vendor/twedoo'),
+        ], 'stone.views');*/
+
+        // Publishing the translation files.
+        /*$this->publishes([
+            __DIR__.'/../resources/lang' => resource_path('lang/vendor/twedoo'),
+        ], 'stone.views');*/
+
+        // Registering package commands.
+        // $this->commands([]);
     }
 }

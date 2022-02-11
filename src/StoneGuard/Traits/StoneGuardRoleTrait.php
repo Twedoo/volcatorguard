@@ -20,7 +20,7 @@ trait StoneGuardRoleTrait
         $rolePrimaryKey = $this->primaryKey;
         $cacheKey = 'stoneGuard_permissions_for_role_' . $this->$rolePrimaryKey;
         if (Cache::getStore() instanceof TaggableStore) {
-            return Cache::tags(Config::get('stoneGuard.permission_role_table'))->remember($cacheKey, Config::get('cache.ttl', 60), function () {
+            return Cache::tags(Config::get('stone.permission_role_table'))->remember($cacheKey, Config::get('cache.ttl', 60), function () {
                 return $this->perms()->get();
             });
         } else return $this->perms()->get();
@@ -32,7 +32,7 @@ trait StoneGuardRoleTrait
             return false;
         }
         if (Cache::getStore() instanceof TaggableStore) {
-            Cache::tags(Config::get('stoneGuard.permission_role_table'))->flush();
+            Cache::tags(Config::get('stone.permission_role_table'))->flush();
         }
         return true;
     }
@@ -43,7 +43,7 @@ trait StoneGuardRoleTrait
             return false;
         }
         if (Cache::getStore() instanceof TaggableStore) {
-            Cache::tags(Config::get('stoneGuard.permission_role_table'))->flush();
+            Cache::tags(Config::get('stone.permission_role_table'))->flush();
         }
         return true;
     }
@@ -54,7 +54,7 @@ trait StoneGuardRoleTrait
             return false;
         }
         if (Cache::getStore() instanceof TaggableStore) {
-            Cache::tags(Config::get('stoneGuard.permission_role_table'))->flush();
+            Cache::tags(Config::get('stone.permission_role_table'))->flush();
         }
         return true;
     }
@@ -66,7 +66,7 @@ trait StoneGuardRoleTrait
      */
     public function users()
     {
-        return $this->belongsToMany(Config::get('auth.providers.users.model'), Config::get('stoneGuard.role_user_table'), Config::get('stoneGuard.role_foreign_key'), Config::get('stoneGuard.user_foreign_key'));
+        return $this->belongsToMany(Config::get('auth.providers.users.model'), Config::get('stone.role_user_table'), Config::get('stone.role_foreign_key'), Config::get('stone.user_foreign_key'));
     }
 
     /**
@@ -77,7 +77,7 @@ trait StoneGuardRoleTrait
      */
     public function perms()
     {
-        return $this->belongsToMany(Config::get('stoneGuard.permission'), Config::get('stoneGuard.permission_role_table'), Config::get('stoneGuard.role_foreign_key'), Config::get('stoneGuard.permission_foreign_key'));
+        return $this->belongsToMany(Config::get('stone.permission'), Config::get('stone.permission_role_table'), Config::get('stone.role_foreign_key'), Config::get('stone.permission_foreign_key'));
     }
 
     /**
@@ -92,7 +92,7 @@ trait StoneGuardRoleTrait
         parent::boot();
 
         static::deleting(function ($role) {
-            if (!method_exists(Config::get('stoneGuard.role'), 'bootSoftDeletes')) {
+            if (!method_exists(Config::get('stone.role'), 'bootSoftDeletes')) {
                 $role->users()->sync([]);
                 $role->perms()->sync([]);
             }
@@ -153,7 +153,7 @@ trait StoneGuardRoleTrait
         }
 
         if (Cache::getStore() instanceof TaggableStore) {
-            Cache::tags(Config::get('stoneGuard.permission_role_table'))->flush();
+            Cache::tags(Config::get('stone.permission_role_table'))->flush();
         }
     }
 
