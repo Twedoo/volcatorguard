@@ -3,7 +3,7 @@
 namespace Twedoo\StoneGuard\Models;
 
 use Twedoo\StoneGuard\StoneGuardPermission;
-use Twedoo\Stone\InstallerModule\Models\modules;
+use Twedoo\Stone\Organizer\Models\modules;
 
 
 class Permission extends StoneGuardPermission

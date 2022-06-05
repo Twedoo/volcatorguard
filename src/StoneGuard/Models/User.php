@@ -2,6 +2,7 @@
 
 namespace Twedoo\StoneGuard\Models;
 
+use App\Modules\Applications\Models\Spaces;
 use Twedoo\StoneGuard\Models\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -49,4 +50,10 @@ class User extends Authenticatable
     {
         return $this->roles->pluck('id', 'id')->first();
     }
+
+    public function spaces()
+    {
+        return $this->hasMany(Spaces::class);
+    }
+
 }

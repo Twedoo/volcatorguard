@@ -24,7 +24,7 @@ class StoneGuardSetupTables extends Migration
                 $table->string('genre')->nullable();
                 $table->string('date')->nullable();
                 $table->string('avatar')->nullable();
-                $table->string('statut')->nullable();
+                $table->string('status')->nullable();
                 $table->string('type')->nullable();
                 $table->rememberToken();
                 $table->timestamps();
