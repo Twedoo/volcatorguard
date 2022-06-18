@@ -63,7 +63,7 @@ class StoneGuardSetupTables extends Migration
             Schema::create('{{ $permissionsTable }}', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name')->unique();
-                $table->string('id_module')->nullable();
+                $table->string('id_stone')->nullable();
                 $table->string('display_name')->nullable();
                 $table->string('description')->nullable();
                 $table->timestamps();

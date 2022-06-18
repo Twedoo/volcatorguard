@@ -2,7 +2,7 @@
 
 namespace Twedoo\StoneGuard\Models;
 
-use App\Modules\Applications\Models\Spaces;
+use Twedoo\Stone\Modules\Applications\Models\Spaces;
 use Twedoo\StoneGuard\Models\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
