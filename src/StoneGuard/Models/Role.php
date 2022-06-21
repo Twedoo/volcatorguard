@@ -7,6 +7,14 @@ use Config;
 
 class Role extends StoneGuardRole
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name'
+    ];
 
     public function permissions()
     {

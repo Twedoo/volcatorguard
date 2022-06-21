@@ -12,6 +12,72 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Stone Space Model
+    |--------------------------------------------------------------------------
+    |
+    | This is the Module model used by Stone to create correct relations. Update
+    | the module if it is in a different namespace.
+    |
+    */
+    'spaces' => 'Twedoo\Stone\Application\Models\Spaces',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Stone Spaces Table
+    |--------------------------------------------------------------------------
+    |
+    | This is the modules table used by Stone to save roles to the database.
+    |
+    */
+    'spaces_table' => 'spaces',
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Stone Application Model
+    |--------------------------------------------------------------------------
+    |
+    | This is the Module model used by Stone to create correct relations. Update
+    | the module if it is in a different namespace.
+    |
+    */
+    'applications' => 'Twedoo\Stone\Application\Models\Applications',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Stone Applications Table
+    |--------------------------------------------------------------------------
+    |
+    | This is the modules table used by Stone to save roles to the database.
+    |
+    */
+    'applications_table' => 'applications',
+
+    /*
+    |--------------------------------------------------------------------------
+    | StoneGuard applications_user Table
+    |--------------------------------------------------------------------------
+    |
+    | This is the role_user table used by StoneGuard to save assigned roles to the
+    | database.
+    |
+    */
+    'applications_user_table' => 'applications_user',
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | StoneGuard applications_module Table
+    |--------------------------------------------------------------------------
+    |
+    | This is the role_user table used by StoneGuard to save assigned roles to the
+    | database.
+    |
+    */
+    'applications_module_table' => 'applications_module',
+
+    /*
+    |--------------------------------------------------------------------------
     | Stone Module Model
     |--------------------------------------------------------------------------
     |
@@ -19,7 +85,7 @@ return [
     | the module if it is in a different namespace.
     |
     */
-    'module' => 'Twedoo\Stone\InstallerModule\Models\modules',
+    'module' => 'Twedoo\Stone\Organizer\Models\Stones',
 
     /*
     |--------------------------------------------------------------------------
@@ -228,4 +294,14 @@ return [
     */
     'role_foreign_key' => 'role_id',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Location module uploaded
+    |--------------------------------------------------------------------------
+    */
+    'module_upload' => [
+        'driver' => 'local',
+        'root' => base_path('/app/Modules/'),
+        'url' => env('APP_URL').'/app/Modules',
+    ],
 ];

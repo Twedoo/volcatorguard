@@ -59,9 +59,8 @@
         }
     },
     "autoload-dev": {
-        "classmap": [
-            "tests/Middleware/MiddlewareTest.php"
-        ]
-    },
-    "minimum-stability": "dev"
+        "psr-4": {
+            "Twedoo\\StoneGuard\\Tests\\": "tests"
+        }
+    }
 }
