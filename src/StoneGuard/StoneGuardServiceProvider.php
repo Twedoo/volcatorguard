@@ -100,7 +100,12 @@ class StoneGuardServiceProvider extends ServiceProvider
             return new StoneGuard($app);
         });
 
+        $this->app->bind('stoneGuardByApplication', function ($app) {
+            return new StoneGuardByApplication($app);
+        });
+
         $this->app->alias('stoneGuard', 'Twedoo\StoneGuard\StoneGuard');
+        $this->app->alias('stoneGuardByApplication', 'Twedoo\StoneGuard\StoneGuardByApplication');
     }
 
     /**
@@ -150,23 +155,5 @@ class StoneGuardServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/stone.php' => config_path('stone.php'),
         ], 'stone.config');
-
-        // Publishing the views.
-        /*$this->publishes([
-            __DIR__.'/../resources/views' => base_path('resources/views/vendor/twedoo'),
-        ], 'stone.views');*/
-
-        // Publishing assets.
-        /*$this->publishes([
-            __DIR__.'/../resources/assets' => public_path('vendor/twedoo'),
-        ], 'stone.views');*/
-
-        // Publishing the translation files.
-        /*$this->publishes([
-            __DIR__.'/../resources/lang' => resource_path('lang/vendor/twedoo'),
-        ], 'stone.views');*/
-
-        // Registering package commands.
-        // $this->commands([]);
     }
 }

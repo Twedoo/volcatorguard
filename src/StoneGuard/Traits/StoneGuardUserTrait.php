@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
+use Twedoo\Stone\Core\StoneApplication;
+use Twedoo\StoneGuard\StoneGuardByApplication;
 
 trait StoneGuardUserTrait
 {
@@ -75,7 +77,7 @@ trait StoneGuardUserTrait
      */
     public function roles()
     {
-        return $this->belongsToMany(Config::get('stone.role'), Config::get('stone.role_user_table'), Config::get('stone.user_foreign_key'), Config::get('stone.role_foreign_key'));
+        return $this->belongsToMany(Config::get('stone.role'), Config::get('stone.role_user_table'), Config::get('stone.user_foreign_key'), Config::get('stone.role_foreign_key'), 'application_id');
     }
 
     /**
@@ -144,11 +146,25 @@ trait StoneGuardUserTrait
      */
     public function can($permission, $requireAll = false)
     {
+        $allowed_permission_user = StoneGuardByApplication::isCanPermissionByApplication();
+        $byPassPermission = [
+            Config::get('stone.PERMISSION_SPACE_VIEW'),
+            Config::get('stone.PERMISSION_SPACE_FULL'),
+            Config::get('stone.PERMISSION_APPLICATION_FULL'),
+            Config::get('stone.PERMISSION_APPLICATION_VIEW'),
+        ];
+        $bypass_without_application = is_array($permission) ? count(array_intersect($permission, $byPassPermission)) !== 0 : in_array($permission, $byPassPermission);
+        // If we've permission global not need application like register users or switch between spaces, then by pass it without check application assigned
+        if ($bypass_without_application) {
+            return StoneGuardByApplication::byPassPermissions((array) $permission);
+        }
+
         if (is_array($permission)) {
             foreach ($permission as $permName) {
                 $hasPerm = $this->can($permName);
+                $is_manager_application = StoneGuardByApplication::isAllowedInCurrentApplication($permName, $allowed_permission_user);
 
-                if ($hasPerm && !$requireAll) {
+                if ($hasPerm && !$requireAll && $is_manager_application) {
                     return true;
                 } elseif (!$hasPerm && $requireAll) {
                     return false;
@@ -163,13 +179,13 @@ trait StoneGuardUserTrait
             foreach ($this->cachedRoles() as $role) {
                 // Validate against the Permission table
                 foreach ($role->cachedPermissions() as $perm) {
-                    if (Str::is( $permission, $perm->name) ) {
+                    $is_manager_application = StoneGuardByApplication::isAllowedInCurrentApplication($perm->name, $allowed_permission_user);
+                    if (Str::is( $permission, $perm->name) && $is_manager_application) {
                         return true;
                     }
                 }
             }
         }
-
         return false;
     }
 
@@ -250,6 +266,7 @@ trait StoneGuardUserTrait
      */
     public function attachRole($role)
     {
+        $currentApplication =  null;
         if(is_object($role)) {
             $role = $role->getKey();
         }
@@ -257,8 +274,10 @@ trait StoneGuardUserTrait
         if(is_array($role)) {
             $role = $role['id'];
         }
-
-        $this->roles()->attach($role);
+        if (StoneApplication::getCurrentApplicationId() != null) {
+            $currentApplication = StoneApplication::getCurrentApplicationId();
+        }
+        $this->roles()->attach($role, ['application_id' => $currentApplication]);
     }
 
     /**
