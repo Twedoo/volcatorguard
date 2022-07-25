@@ -22,10 +22,10 @@ class StoneGuardSetupTables extends Migration
                 $table->string('email')->unique();
                 $table->string('password');
                 $table->string('genre')->nullable();
-                $table->string('date')->nullable();
                 $table->string('avatar')->nullable();
-                $table->string('status')->nullable();
+                $table->boolean('status')->default(1);
                 $table->string('type')->nullable();
+                $table->boolean('depend')->default(0);
                 $table->rememberToken();
                 $table->timestamps();
             });
