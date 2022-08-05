@@ -111,6 +111,7 @@ trait StoneGuardRoleTrait
      */
     public function hasPermission($name, $requireAll = false)
     {
+
         if (is_array($name)) {
             foreach ($name as $permissionName) {
                 $hasPermission = $this->hasPermission($permissionName);

@@ -23,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'code', 'name', 'email', 'password',
+        'code', 'name', 'email', 'password', 'status', 'depend'
     ];
 
     /**
@@ -40,7 +40,7 @@ class User extends Authenticatable
      */
     public function roles()
     {
-        return $this->belongsToMany(Role::class, Config::get('stone::assigned_roles_table'));
+        return $this->belongsToMany(Role::class, Config::get('stone::assigned_roles_table'))->withPivot('application_id');
     }
 
     /**

@@ -13,12 +13,11 @@ class Role extends StoneGuardRole
      * @var array
      */
     protected $fillable = [
-        'name'
+        'name', 'display_name', 'description', 'type'
     ];
 
     public function permissions()
     {
         return $this->belongsToMany(Permission::class, Config::get('stone::permission_role_table'));
     }
-
 }

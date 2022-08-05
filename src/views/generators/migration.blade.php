@@ -22,10 +22,10 @@ class StoneGuardSetupTables extends Migration
                 $table->string('email')->unique();
                 $table->string('password');
                 $table->string('genre')->nullable();
-                $table->string('date')->nullable();
                 $table->string('avatar')->nullable();
-                $table->string('status')->nullable();
+                $table->boolean('status')->default(1);
                 $table->string('type')->nullable();
+                $table->boolean('depend')->default(0);
                 $table->rememberToken();
                 $table->timestamps();
             });
@@ -38,7 +38,7 @@ class StoneGuardSetupTables extends Migration
                 $table->string('name')->unique();
                 $table->string('display_name')->nullable();
                 $table->string('description')->nullable();
-                $table->string('id_creator')->nullable();
+                $table->string('type')->nullable();
                 $table->timestamps();
             });
         }
@@ -46,15 +46,15 @@ class StoneGuardSetupTables extends Migration
         // Create table for associating roles to users (Many-to-Many)
         if (!Schema::hasTable('{{ $roleUserTable }}')) {
             Schema::create('{{ $roleUserTable }}', function (Blueprint $table) {
+                $table->increments('id');
                 $table->integer('user_id')->unsigned();
                 $table->integer('role_id')->unsigned();
+                $table->integer('application_id')->nullable();
 
                 $table->foreign('user_id')->references('{{ $userKeyName }}')->on('{{ $usersTable }}')
                 ->onUpdate('cascade')->onDelete('cascade');
                 $table->foreign('role_id')->references('id')->on('{{ $rolesTable }}')
                 ->onUpdate('cascade')->onDelete('cascade');
-
-                $table->primary(['user_id', 'role_id']);
             });
         }
 

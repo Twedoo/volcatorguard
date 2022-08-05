@@ -54,7 +54,8 @@
                 "Twedoo\\StoneGuard\\StoneGuardServiceProvider"
             ],
             "aliases":{
-                "StoneGuard": "Twedoo\\StoneGuard\\StoneGuardFacade"
+                "StoneGuard": "Twedoo\\StoneGuard\\StoneGuardFacade",
+                "StoneGuardByApplication": "Twedoo\\StoneGuard\\StoneGuardByApplicationFacade"
             }
         }
     },
