@@ -36,13 +36,12 @@ class StoneGuardByApplication
         $this->app = $app;
     }
 
-
     /**
      * @param $user
      * @param $permission
      * @return
      */
-     public function isCanPermissionByApplication() {
+     public static function isCanPermissionByApplication() {
          $user = auth()->user();
          return Permission::join('permission_role', 'permission_role.permission_id', '=', 'permissions.id')
              ->join('role_user', 'role_user.role_id', '=', 'permission_role.role_id')
@@ -55,7 +54,7 @@ class StoneGuardByApplication
      * @param $permission
      * @return
      */
-     public function byPassPermissions($permission) {
+     public static function byPassPermissions($permission) {
          $user = auth()->user();
          return Permission::join('permission_role', 'permission_role.permission_id', '=', 'permissions.id')
              ->join('role_user', 'role_user.role_id', '=', 'permission_role.role_id')
@@ -70,7 +69,7 @@ class StoneGuardByApplication
      * @param array $options
      * @return bool
      */
-    public function isAllowedInCurrentApplication($permission, $permissions) {
+    public static function isAllowedInCurrentApplication($permission, $permissions) {
          return in_array($permission, $permissions);
     }
 }
