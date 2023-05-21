@@ -5,5 +5,5 @@ Role-based Permissions for Stone CMS Multi-Space &amp; Multi-application https:/
 ### Install
 
 ```
-  composer require twedoo/stoneguard
+  composer require twedoo/volcatorguard
 ```
