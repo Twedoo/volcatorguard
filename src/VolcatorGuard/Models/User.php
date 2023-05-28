@@ -1,21 +1,21 @@
 <?php
 
-namespace Twedoo\StoneGuard\Models;
+namespace Twedoo\VolcatorGuard\Models;
 
-use Twedoo\Stone\Modules\Applications\Models\Spaces;
-use Twedoo\StoneGuard\Models\Role;
+use Twedoo\Volcator\Modules\Applications\Models\Spaces;
+use Twedoo\VolcatorGuard\Models\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Config;
 use Laravel\Sanctum\HasApiTokens;
-use Twedoo\StoneGuard\Traits\StoneGuardUserTrait;
+use Twedoo\VolcatorGuard\Traits\VolcatorGuardUserTrait;
 
 class User extends Authenticatable
 {
     use Notifiable;
-    use StoneGuardUserTrait;
+    use VolcatorGuardUserTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'code', 'name', 'email', 'password', 'status', 'depend'
+        'code', 'name', 'email', 'password', 'status', 'depend', 'local'
     ];
 
     /**
@@ -40,7 +40,7 @@ class User extends Authenticatable
      */
     public function roles()
     {
-        return $this->belongsToMany(Role::class, Config::get('stone::assigned_roles_table'))->withPivot('application_id');
+        return $this->belongsToMany(Role::class, Config::get('volcator::assigned_roles_table'))->withPivot('application_id');
     }
 
     /**

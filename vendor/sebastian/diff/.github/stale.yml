@@ -14,8 +14,8 @@ exemptLabels:
 # Set to true to ignore issues in a project (defaults to false)
 exemptProjects: false
 
-# Set to true to ignore issues in a milestone (defaults to false)
-exemptMilestones: false
+# Set to true to ignore issues in a milevolcator (defaults to false)
+exemptMilevolcators: false
 
 # Label to use when marking as stale
 staleLabel: wontfix

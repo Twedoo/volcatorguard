@@ -1,13 +1,13 @@
 <?php
 
-namespace Twedoo\StoneGuard;
+namespace Twedoo\VolcatorGuard;
 
 /**
- * This file is part of StoneGuard,
+ * This file is part of VolcatorGuard,
  * a role & permission management solution for Laravel.
  *
  * @license MIT
- * @package Twedoo\stoneGuard
+ * @package Twedoo\volcatorGuard
  */
 
 use Illuminate\Console\Command;
@@ -20,14 +20,14 @@ class MigrationCommand extends Command
      *
      * @var string
      */
-    protected $name = 'stone:migration:guard';
+    protected $name = 'volcator:migration:guard';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Creates a migration following the StoneGuard specifications.';
+    protected $description = 'Creates a migration following the VolcatorGuard specifications.';
 
     /**
      * Execute the console command.
@@ -46,12 +46,12 @@ class MigrationCommand extends Command
      */
     public function handle()
     {
-        $this->laravel->view->addNamespace('stone', substr(__DIR__, 0, -8) . 'views');
+        $this->laravel->view->addNamespace('volcator', substr(__DIR__, 0, -8) . 'views');
 
-        $rolesTable = Config::get('stone.roles_table');
-        $roleUserTable = Config::get('stone.role_user_table');
-        $permissionsTable = Config::get('stone.permissions_table');
-        $permissionRoleTable = Config::get('stone.permission_role_table');
+        $rolesTable = Config::get('volcator.roles_table');
+        $roleUserTable = Config::get('volcator.role_user_table');
+        $permissionsTable = Config::get('volcator.permissions_table');
+        $permissionRoleTable = Config::get('volcator.permission_role_table');
 
         $this->line('');
         $this->info("Tables: $rolesTable, $roleUserTable, $permissionsTable, $permissionRoleTable");
@@ -80,8 +80,8 @@ class MigrationCommand extends Command
             $this->line('');
 
         }
-        $this->callSilent('vendor:publish', ['--provider' => 'Twedoo\Stone\StoneGuardServiceProvider']);
-        $this->info('Twedoo\Stone was installed successfully.');
+        $this->callSilent('vendor:publish', ['--provider' => 'Twedoo\Volcator\VolcatorGuardServiceProvider']);
+        $this->info('Twedoo\Volcator was installed successfully.');
     }
 
     /**
@@ -93,7 +93,7 @@ class MigrationCommand extends Command
      */
     protected function createMigration($rolesTable, $roleUserTable, $permissionsTable, $permissionRoleTable)
     {
-        $migrationFile = base_path("/database/migrations") . "/" . date('Y_m_d_His') . "_stoneguard_setup_tables.php";
+        $migrationFile = base_path("/database/migrations") . "/" . date('Y_m_d_His') . "_volcatorguard_setup_tables.php";
 
         $userModelName = Config::get('auth.providers.users.model');
         $userModel = new $userModelName();
@@ -102,7 +102,7 @@ class MigrationCommand extends Command
 
         $data = compact('rolesTable', 'roleUserTable', 'permissionsTable', 'permissionRoleTable', 'usersTable', 'userKeyName');
 
-        $output = $this->laravel->view->make('stone::generators.migration')->with($data)->render();
+        $output = $this->laravel->view->make('volcator::generators.migration')->with($data)->render();
 
         if (!file_exists($migrationFile) && $fs = fopen($migrationFile, 'x')) {
             fwrite($fs, $output);

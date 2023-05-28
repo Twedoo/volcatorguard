@@ -1,16 +1,16 @@
-<?php namespace Twedoo\StoneGuard;
+<?php namespace Twedoo\VolcatorGuard;
 
 /**
- * This file is part of StoneGuard,
+ * This file is part of VolcatorGuard,
  * a role & permission management solution for Laravel.
  *
  * @license MIT
- * @package Twedoo\stoneGuard
+ * @package Twedoo\volcatorGuard
  */
 
 use Illuminate\Support\ServiceProvider;
 
-class StoneGuardServiceProvider extends ServiceProvider
+class VolcatorGuardServiceProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
@@ -28,11 +28,11 @@ class StoneGuardServiceProvider extends ServiceProvider
     {
         // Publish config files
         $this->publishes([
-            __DIR__.'/../config/config.php' => app()->basePath() . '/config/stone.php',
+            __DIR__.'/../config/config.php' => app()->basePath() . '/config/volcator.php',
         ]);
 
         // Register commands
-        $this->commands('command.stone.migration.guard');
+        $this->commands('command.volcator.migration.guard');
 
         // Register blade directives
         $this->bladeDirectives();
@@ -45,7 +45,7 @@ class StoneGuardServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerStoneGuard();
+        $this->registerVolcatorGuard();
 
         $this->registerCommands();
 
@@ -61,31 +61,31 @@ class StoneGuardServiceProvider extends ServiceProvider
     {
         if (!class_exists('\Blade')) return;
 
-        // Call to StoneGuard::hasRole
+        // Call to VolcatorGuard::hasRole
         \Blade::directive('role', function($expression) {
-            return "<?php if (\\StoneGuard::hasRole({$expression})) : ?>";
+            return "<?php if (\\VolcatorGuard::hasRole({$expression})) : ?>";
         });
 
         \Blade::directive('endrole', function($expression) {
-            return "<?php endif; // StoneGuard::hasRole ?>";
+            return "<?php endif; // VolcatorGuard::hasRole ?>";
         });
 
-        // Call to StoneGuard::can
+        // Call to VolcatorGuard::can
         \Blade::directive('permission', function($expression) {
-            return "<?php if (\\StoneGuard::can({$expression})) : ?>";
+            return "<?php if (\\VolcatorGuard::can({$expression})) : ?>";
         });
 
         \Blade::directive('endpermission', function($expression) {
-            return "<?php endif; // StoneGuard::can ?>";
+            return "<?php endif; // VolcatorGuard::can ?>";
         });
 
-        // Call to StoneGuard::ability
+        // Call to VolcatorGuard::ability
         \Blade::directive('ability', function($expression) {
-            return "<?php if (\\StoneGuard::ability({$expression})) : ?>";
+            return "<?php if (\\VolcatorGuard::ability({$expression})) : ?>";
         });
 
         \Blade::directive('endability', function($expression) {
-            return "<?php endif; // StoneGuard::ability ?>";
+            return "<?php endif; // VolcatorGuard::ability ?>";
         });
     }
 
@@ -94,18 +94,18 @@ class StoneGuardServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    private function registerStoneGuard()
+    private function registerVolcatorGuard()
     {
-        $this->app->bind('stoneGuard', function ($app) {
-            return new StoneGuard($app);
+        $this->app->bind('volcatorGuard', function ($app) {
+            return new VolcatorGuard($app);
         });
 
-        $this->app->bind('stoneGuardByApplication', function ($app) {
-            return new StoneGuardByApplication($app);
+        $this->app->bind('volcatorGuardByApplication', function ($app) {
+            return new VolcatorGuardByApplication($app);
         });
 
-        $this->app->alias('stoneGuard', 'Twedoo\StoneGuard\StoneGuard');
-        $this->app->alias('stoneGuardByApplication', 'Twedoo\StoneGuard\StoneGuardByApplication');
+        $this->app->alias('volcatorGuard', 'Twedoo\VolcatorGuard\VolcatorGuard');
+        $this->app->alias('volcatorGuardByApplication', 'Twedoo\VolcatorGuard\VolcatorGuardByApplication');
     }
 
     /**
@@ -115,20 +115,20 @@ class StoneGuardServiceProvider extends ServiceProvider
      */
     private function registerCommands()
     {
-        $this->app->singleton('command.stone.migration.guard', function ($app) {
+        $this->app->singleton('command.volcator.migration.guard', function ($app) {
             return new MigrationCommand();
         });
     }
 
     /**
-     * Merges user's and stoneGuard's configs.
+     * Merges user's and volcatorGuard's configs.
      *
      * @return void
      */
     private function mergeConfig()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/config.php', 'stone'
+            __DIR__.'/../config/config.php', 'volcator'
         );
     }
 
@@ -140,7 +140,7 @@ class StoneGuardServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            'command.stone.migration.guard'
+            'command.volcator.migration.guard'
         ];
     }
 
@@ -153,7 +153,7 @@ class StoneGuardServiceProvider extends ServiceProvider
     {
         // Publishing the configuration file.
         $this->publishes([
-            __DIR__.'/../config/stone.php' => config_path('stone.php'),
-        ], 'stone.config');
+            __DIR__.'/../config/volcator.php' => config_path('volcator.php'),
+        ], 'volcator.config');
     }
 }

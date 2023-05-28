@@ -1,11 +1,11 @@
 <?php
 
-namespace Twedoo\StoneGuard\Models;
+namespace Twedoo\VolcatorGuard\Models;
 
-use Twedoo\StoneGuard\StoneGuardRole;
+use Twedoo\VolcatorGuard\VolcatorGuardRole;
 use Config;
 
-class Role extends StoneGuardRole
+class Role extends VolcatorGuardRole
 {
     /**
      * The attributes that are mass assignable.
@@ -18,6 +18,6 @@ class Role extends StoneGuardRole
 
     public function permissions()
     {
-        return $this->belongsToMany(Permission::class, Config::get('stone::permission_role_table'));
+        return $this->belongsToMany(Permission::class, Config::get('volcator::permission_role_table'));
     }
 }
