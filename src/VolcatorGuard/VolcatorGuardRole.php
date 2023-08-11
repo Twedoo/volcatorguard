@@ -1,21 +1,21 @@
-<?php namespace Twedoo\StoneGuard;
+<?php namespace Twedoo\VolcatorGuard;
 
 /**
- * This file is part of StoneGuard,
+ * This file is part of VolcatorGuard,
  * a role & permission management solution for Laravel.
  *
  * @license MIT
- * @package Twedoo\stoneGuard
+ * @package Twedoo\volcatorGuard
  */
 
-use Twedoo\StoneGuard\Contracts\StoneGuardRoleInterface;
-use Twedoo\StoneGuard\Traits\StoneGuardRoleTrait;
+use Twedoo\VolcatorGuard\Contracts\VolcatorGuardRoleInterface;
+use Twedoo\VolcatorGuard\Traits\VolcatorGuardRoleTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
 
-class StoneGuardRole extends Model implements StoneGuardRoleInterface
+class VolcatorGuardRole extends Model implements VolcatorGuardRoleInterface
 {
-    use StoneGuardRoleTrait;
+    use VolcatorGuardRoleTrait;
 
     /**
      * The database table used by the model.
@@ -32,7 +32,7 @@ class StoneGuardRole extends Model implements StoneGuardRoleInterface
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->table = Config::get('stone.roles_table');
+        $this->table = Config::get('volcator.roles_table');
     }
 
 }

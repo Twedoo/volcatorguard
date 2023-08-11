@@ -1,11 +1,11 @@
-<?php namespace Twedoo\StoneGuard\Traits;
+<?php namespace Twedoo\VolcatorGuard\Traits;
 
 /**
- * This file is part of StoneGuard,
+ * This file is part of VolcatorGuard,
  * a role & permission management solution for Laravel.
  *
  * @license MIT
- * @package Twedoo\stoneGuard
+ * @package Twedoo\volcatorGuard
  */
 
 use Illuminate\Cache\TaggableStore;
@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
-use Twedoo\Stone\Core\StoneApplication;
-use Twedoo\StoneGuard\StoneGuardByApplication;
+use Twedoo\Volcator\Core\VolcatorApplication;
+use Twedoo\VolcatorGuard\VolcatorGuardByApplication;
 
-trait StoneGuardUserTrait
+trait VolcatorGuardUserTrait
 {
     /**
      * Big block of caching functionality.
@@ -26,9 +26,9 @@ trait StoneGuardUserTrait
     public function cachedRoles()
     {
         $userPrimaryKey = $this->primaryKey;
-        $cacheKey = 'stoneGuard_roles_for_user_'.$this->$userPrimaryKey;
+        $cacheKey = 'volcatorGuard_roles_for_user_'.$this->$userPrimaryKey;
         if(Cache::getStore() instanceof TaggableStore) {
-            return Cache::tags(Config::get('stone.role_user_table'))->remember($cacheKey, Config::get('cache.ttl'), function () {
+            return Cache::tags(Config::get('volcator.role_user_table'))->remember($cacheKey, Config::get('cache.ttl'), function () {
                 return $this->roles()->get();
             });
         }
@@ -41,7 +41,7 @@ trait StoneGuardUserTrait
     public function save(array $options = [])
     {   //both inserts and updates
         if(Cache::getStore() instanceof TaggableStore) {
-            Cache::tags(Config::get('stone.role_user_table'))->flush();
+            Cache::tags(Config::get('volcator.role_user_table'))->flush();
         }
         return parent::save($options);
     }
@@ -53,7 +53,7 @@ trait StoneGuardUserTrait
     {   //soft or hard
         $result = parent::delete($options);
         if(Cache::getStore() instanceof TaggableStore) {
-            Cache::tags(Config::get('stone.role_user_table'))->flush();
+            Cache::tags(Config::get('volcator.role_user_table'))->flush();
         }
         return $result;
     }
@@ -65,7 +65,7 @@ trait StoneGuardUserTrait
     {   //soft delete undo's
         $result = parent::restore();
         if(Cache::getStore() instanceof TaggableStore) {
-            Cache::tags(Config::get('stone.role_user_table'))->flush();
+            Cache::tags(Config::get('volcator.role_user_table'))->flush();
         }
         return $result;
     }
@@ -77,7 +77,7 @@ trait StoneGuardUserTrait
      */
     public function roles()
     {
-        return $this->belongsToMany(Config::get('stone.role'), Config::get('stone.role_user_table'), Config::get('stone.user_foreign_key'), Config::get('stone.role_foreign_key'), 'application_id');
+        return $this->belongsToMany(Config::get('volcator.role'), Config::get('volcator.role_user_table'), Config::get('volcator.user_foreign_key'), Config::get('volcator.role_foreign_key'), 'application_id');
     }
 
     /**
@@ -146,23 +146,23 @@ trait StoneGuardUserTrait
      */
     public function can($permission, $requireAll = false)
     {
-        $allowed_permission_user = StoneGuardByApplication::isCanPermissionByApplication();
+        $allowed_permission_user = VolcatorGuardByApplication::isCanPermissionByApplication();
         $byPassPermission = [
-            Config::get('stone.PERMISSION_SPACE_VIEW'),
-            Config::get('stone.PERMISSION_SPACE_FULL'),
-            Config::get('stone.PERMISSION_APPLICATION_FULL'),
-            Config::get('stone.PERMISSION_APPLICATION_VIEW'),
+            Config::get('volcator.PERMISSION_SPACE_VIEW'),
+//            Config::get('volcator.PERMISSION_SPACE_FULL'),
+//            Config::get('volcator.PERMISSION_APPLICATION_FULL'),
+            Config::get('volcator.PERMISSION_APPLICATION_VIEW'),
         ];
         $bypass_without_application = is_array($permission) ? count(array_intersect($permission, $byPassPermission)) !== 0 : in_array($permission, $byPassPermission);
         // If we've permission global not need application like register users or switch between spaces, then by pass it without check application assigned
         if ($bypass_without_application) {
-            return StoneGuardByApplication::byPassPermissions((array) $permission);
+            return VolcatorGuardByApplication::byPassPermissions((array) $permission);
         }
 
         if (is_array($permission)) {
             foreach ($permission as $permName) {
                 $hasPerm = $this->can($permName);
-                $is_manager_application = StoneGuardByApplication::isAllowedInCurrentApplication($permName, $allowed_permission_user);
+                $is_manager_application = VolcatorGuardByApplication::isAllowedInCurrentApplication($permName, $allowed_permission_user);
 
                 if ($hasPerm && !$requireAll && $is_manager_application) {
                     return true;
@@ -179,7 +179,7 @@ trait StoneGuardUserTrait
             foreach ($this->cachedRoles() as $role) {
                 // Validate against the Permission table
                 foreach ($role->cachedPermissions() as $perm) {
-                    $is_manager_application = StoneGuardByApplication::isAllowedInCurrentApplication($perm->name, $allowed_permission_user);
+                    $is_manager_application = VolcatorGuardByApplication::isAllowedInCurrentApplication($perm->name, $allowed_permission_user);
                     if (Str::is( $permission, $perm->name) && $is_manager_application) {
                         return true;
                     }
@@ -274,8 +274,8 @@ trait StoneGuardUserTrait
         if(is_array($role)) {
             $role = $role['id'];
         }
-        if (StoneApplication::getCurrentApplicationId() != null) {
-            $currentApplication = StoneApplication::getCurrentApplicationId();
+        if (VolcatorApplication::getCurrentApplicationId() != null) {
+            $currentApplication = VolcatorApplication::getCurrentApplicationId();
         }
         $this->roles()->attach($role, ['application_id' => $currentApplication]);
     }

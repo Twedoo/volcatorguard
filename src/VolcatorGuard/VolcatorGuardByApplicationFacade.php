@@ -1,16 +1,16 @@
-<?php namespace Twedoo\StoneGuard;
+<?php namespace Twedoo\VolcatorGuard;
 
 /**
- * This file is part of StoneGuard,
+ * This file is part of VolcatorGuard,
  * a role & permission management solution for Laravel.
  *
  * @license MIT
- * @package Twedoo\stoneGuard
+ * @package Twedoo\volcatorGuard
  */
 
 use Illuminate\Support\Facades\Facade;
 
-class StoneGuardByApplicationFacade extends Facade
+class VolcatorGuardByApplicationFacade extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -19,6 +19,6 @@ class StoneGuardByApplicationFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'stoneGuardByApplication';
+        return 'volcatorGuardByApplication';
     }
 }

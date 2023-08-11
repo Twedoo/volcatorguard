@@ -1,20 +1,20 @@
-<?php namespace Twedoo\StoneGuard;
+<?php namespace Twedoo\VolcatorGuard;
 
 use DB;
 use League\Flysystem\Config;
-use Twedoo\Stone\Core\StoneApplication;
-use Twedoo\StoneGuard\Models\Permission;
-use Twedoo\StoneGuard\Models\Role;
-use Twedoo\StoneGuard\Models\User;
+use Twedoo\Volcator\Core\VolcatorApplication;
+use Twedoo\VolcatorGuard\Models\Permission;
+use Twedoo\VolcatorGuard\Models\Role;
+use Twedoo\VolcatorGuard\Models\User;
 /**
- * This class is the main entry point of StoneGuard. Usually the interaction
- * with this class will be done through the StoneGuard Facade
+ * This class is the main entry point of VolcatorGuard. Usually the interaction
+ * with this class will be done through the VolcatorGuard Facade
  *
  * @license MIT
- * @package Twedoo\stoneGuard
+ * @package Twedoo\volcatorGuard
  */
 
-class StoneGuardByApplication
+class VolcatorGuardByApplication
 {
     /**
      * Laravel application
@@ -45,7 +45,7 @@ class StoneGuardByApplication
          $user = auth()->user();
          return Permission::join('permission_role', 'permission_role.permission_id', '=', 'permissions.id')
              ->join('role_user', 'role_user.role_id', '=', 'permission_role.role_id')
-             ->where('role_user.application_id', StoneApplication::getCurrentApplicationId())
+             ->where('role_user.application_id', VolcatorApplication::getCurrentApplicationId())
              ->where('role_user.user_id', $user->id)->pluck('permissions.name')->toArray();
      }
 

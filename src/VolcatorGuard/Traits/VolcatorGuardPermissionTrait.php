@@ -1,16 +1,16 @@
-<?php namespace Twedoo\StoneGuard\Traits;
+<?php namespace Twedoo\VolcatorGuard\Traits;
 
 /**
- * This file is part of StoneGuard,
+ * This file is part of VolcatorGuard,
  * a role & permission management solution for Laravel.
  *
  * @license MIT
- * @package Twedoo\stoneGuard
+ * @package Twedoo\volcatorGuard
  */
 
 use Illuminate\Support\Facades\Config;
 
-trait StoneGuardPermissionTrait
+trait VolcatorGuardPermissionTrait
 {
     /**
      * Many-to-Many relations with role model.
@@ -19,7 +19,7 @@ trait StoneGuardPermissionTrait
      */
     public function roles()
     {
-        return $this->belongsToMany(Config::get('stone.role'), Config::get('stone.permission_role_table'), Config::get('stone.permission_foreign_key'), Config::get('stone.role_foreign_key'));
+        return $this->belongsToMany(Config::get('volcator.role'), Config::get('volcator.permission_role_table'), Config::get('volcator.permission_foreign_key'), Config::get('volcator.role_foreign_key'));
     }
 
     /**
@@ -34,7 +34,7 @@ trait StoneGuardPermissionTrait
         parent::boot();
 
         static::deleting(function($permission) {
-            if (!method_exists(Config::get('stone.permission'), 'bootSoftDeletes')) {
+            if (!method_exists(Config::get('volcator.permission'), 'bootSoftDeletes')) {
                 $permission->roles()->sync([]);
             }
 
