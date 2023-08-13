@@ -1,14 +1,14 @@
-<?php namespace Twedoo\StoneGuard;
+<?php namespace Twedoo\VolcatorGuard;
 
 /**
- * This class is the main entry point of StoneGuard. Usually the interaction
- * with this class will be done through the StoneGuard Facade
+ * This class is the main entry point of VolcatorGuard. Usually the interaction
+ * with this class will be done through the VolcatorGuard Facade
  *
  * @license MIT
- * @package Twedoo\stoneGuard
+ * @package Twedoo\volcatorGuard
  */
 
-class StoneGuard
+class VolcatorGuard
 {
     /**
      * Laravel application

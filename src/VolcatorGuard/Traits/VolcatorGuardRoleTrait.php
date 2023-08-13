@@ -1,26 +1,26 @@
-<?php namespace Twedoo\StoneGuard\Traits;
+<?php namespace Twedoo\VolcatorGuard\Traits;
 
 /**
- * This file is part of StoneGuard,
+ * This file is part of VolcatorGuard,
  * a role & permission management solution for Laravel.
  *
  * @license MIT
- * @package Twedoo\stoneGuard
+ * @package Twedoo\volcatorGuard
  */
 
 use Illuminate\Cache\TaggableStore;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Cache;
 
-trait StoneGuardRoleTrait
+trait VolcatorGuardRoleTrait
 {
     //Big block of caching functionality.
     public function cachedPermissions()
     {
         $rolePrimaryKey = $this->primaryKey;
-        $cacheKey = 'stoneGuard_permissions_for_role_' . $this->$rolePrimaryKey;
+        $cacheKey = 'volcatorGuard_permissions_for_role_' . $this->$rolePrimaryKey;
         if (Cache::getStore() instanceof TaggableStore) {
-            return Cache::tags(Config::get('stone.permission_role_table'))->remember($cacheKey, Config::get('cache.ttl', 60), function () {
+            return Cache::tags(Config::get('volcator.permission_role_table'))->remember($cacheKey, Config::get('cache.ttl', 60), function () {
                 return $this->perms()->get();
             });
         } else return $this->perms()->get();
@@ -32,7 +32,7 @@ trait StoneGuardRoleTrait
             return false;
         }
         if (Cache::getStore() instanceof TaggableStore) {
-            Cache::tags(Config::get('stone.permission_role_table'))->flush();
+            Cache::tags(Config::get('volcator.permission_role_table'))->flush();
         }
         return true;
     }
@@ -43,7 +43,7 @@ trait StoneGuardRoleTrait
             return false;
         }
         if (Cache::getStore() instanceof TaggableStore) {
-            Cache::tags(Config::get('stone.permission_role_table'))->flush();
+            Cache::tags(Config::get('volcator.permission_role_table'))->flush();
         }
         return true;
     }
@@ -54,7 +54,7 @@ trait StoneGuardRoleTrait
             return false;
         }
         if (Cache::getStore() instanceof TaggableStore) {
-            Cache::tags(Config::get('stone.permission_role_table'))->flush();
+            Cache::tags(Config::get('volcator.permission_role_table'))->flush();
         }
         return true;
     }
@@ -66,7 +66,7 @@ trait StoneGuardRoleTrait
      */
     public function users()
     {
-        return $this->belongsToMany(Config::get('auth.providers.users.model'), Config::get('stone.role_user_table'), Config::get('stone.role_foreign_key'), Config::get('stone.user_foreign_key'));
+        return $this->belongsToMany(Config::get('auth.providers.users.model'), Config::get('volcator.role_user_table'), Config::get('volcator.role_foreign_key'), Config::get('volcator.user_foreign_key'));
     }
 
     /**
@@ -77,7 +77,7 @@ trait StoneGuardRoleTrait
      */
     public function perms()
     {
-        return $this->belongsToMany(Config::get('stone.permission'), Config::get('stone.permission_role_table'), Config::get('stone.role_foreign_key'), Config::get('stone.permission_foreign_key'));
+        return $this->belongsToMany(Config::get('volcator.permission'), Config::get('volcator.permission_role_table'), Config::get('volcator.role_foreign_key'), Config::get('volcator.permission_foreign_key'));
     }
 
     /**
@@ -92,7 +92,7 @@ trait StoneGuardRoleTrait
         parent::boot();
 
         static::deleting(function ($role) {
-            if (!method_exists(Config::get('stone.role'), 'bootSoftDeletes')) {
+            if (!method_exists(Config::get('volcator.role'), 'bootSoftDeletes')) {
                 $role->users()->sync([]);
                 $role->perms()->sync([]);
             }
@@ -154,7 +154,7 @@ trait StoneGuardRoleTrait
         }
 
         if (Cache::getStore() instanceof TaggableStore) {
-            Cache::tags(Config::get('stone.permission_role_table'))->flush();
+            Cache::tags(Config::get('volcator.permission_role_table'))->flush();
         }
     }
 

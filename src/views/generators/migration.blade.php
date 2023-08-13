@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class StoneGuardSetupTables extends Migration
+class VolcatorGuardSetupTables extends Migration
 {
     /**
      * Run the migrations.
@@ -26,6 +26,7 @@ class StoneGuardSetupTables extends Migration
                 $table->boolean('status')->default(1);
                 $table->string('type')->nullable();
                 $table->boolean('depend')->default(0);
+                $table->string('local')->nullable();
                 $table->rememberToken();
                 $table->timestamps();
             });
@@ -63,7 +64,7 @@ class StoneGuardSetupTables extends Migration
             Schema::create('{{ $permissionsTable }}', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name')->unique();
-                $table->string('id_stone')->nullable();
+                $table->string('id_volcator')->nullable();
                 $table->string('display_name')->nullable();
                 $table->string('description')->nullable();
                 $table->timestamps();

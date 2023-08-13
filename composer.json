@@ -40,23 +40,23 @@
             "src/commands"
         ],
         "psr-4": {
-            "Twedoo\\StoneGuard\\": "src/StoneGuard/"
+            "Twedoo\\VolcatorGuard\\": "src/VolcatorGuard/"
         }
     },
     "extra":{
         "laravel":{
             "providers":[
-                "Twedoo\\StoneGuard\\StoneGuardServiceProvider"
+                "Twedoo\\VolcatorGuard\\VolcatorGuardServiceProvider"
             ],
             "aliases":{
-                "StoneGuard": "Twedoo\\StoneGuard\\StoneGuardFacade",
-                "StoneGuardByApplication": "Twedoo\\StoneGuard\\StoneGuardByApplicationFacade"
+                "VolcatorGuard": "Twedoo\\VolcatorGuard\\VolcatorGuardFacade",
+                "VolcatorGuardByApplication": "Twedoo\\VolcatorGuard\\VolcatorGuardByApplicationFacade"
             }
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Twedoo\\StoneGuard\\Tests\\": "tests"
+            "Twedoo\\VolcatorGuard\\Tests\\": "tests"
         }
     }
 }

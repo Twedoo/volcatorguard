@@ -1,14 +1,14 @@
-<?php namespace Twedoo\StoneGuard\Contracts;
+<?php namespace Twedoo\VolcatorGuard\Contracts;
 
 /**
- * This file is part of StoneGuard,
+ * This file is part of VolcatorGuard,
  * a role & permission management solution for Laravel.
  *
  * @license MIT
- * @package Twedoo\stoneGuard
+ * @package Twedoo\volcatorGuard
  */
 
-interface StoneGuardPermissionInterface
+interface VolcatorGuardPermissionInterface
 {
 
     /**

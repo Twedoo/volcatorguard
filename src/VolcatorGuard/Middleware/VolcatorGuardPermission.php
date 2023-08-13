@@ -1,17 +1,17 @@
-<?php namespace Twedoo\StoneGuard\Middleware;
+<?php namespace Twedoo\VolcatorGuard\Middleware;
 
 /**
- * This file is part of StoneGuard,
+ * This file is part of VolcatorGuard,
  * a role & permission management solution for Laravel.
  *
  * @license MIT
- * @package Twedoo\stoneGuard
+ * @package Twedoo\volcatorGuard
  */
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
-class StoneGuardPermission
+class VolcatorGuardPermission
 {
 	const DELIMITER = '|';
 

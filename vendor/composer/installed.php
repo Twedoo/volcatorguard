@@ -6,7 +6,7 @@
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'reference' => '9d21180749bf5ad536f700c78cd28ebd386f9c4b',
-        'name' => 'twedoo/stoneguard',
+        'name' => 'twedoo/volcatorguard',
         'dev' => true,
     ),
     'versions' => array(
@@ -557,7 +557,7 @@
             'reference' => '34a41e998c2183e22995f158c581e7b5e755ab9e',
             'dev_requirement' => true,
         ),
-        'twedoo/stoneguard' => array(
+        'twedoo/volcatorguard' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
             'type' => 'library',

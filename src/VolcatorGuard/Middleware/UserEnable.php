@@ -1,11 +1,11 @@
-<?php namespace Twedoo\StoneGuard\Middleware;
+<?php namespace Twedoo\VolcatorGuard\Middleware;
 
 /**
- * This file is part of Stone,
+ * This file is part of Volcator,
  * a role & permission management solution for Laravel.
  *
  * @license MIT
- * @package Twedoo\stoneGuard
+ * @package Twedoo\volcatorGuard
  */
 
 use Closure;
@@ -25,15 +25,10 @@ class UserEnable
 	{
         if(auth()->check() && (auth()->user()->status == false)){
             Auth::logout();
-
             $request->session()->invalidate();
-
             $request->session()->regenerateToken();
-
             return redirect()->route('login')->with('error', 'Your Account is suspended, please contact Admin.');
-
         }
-
         return $next($request);
 	}
 }

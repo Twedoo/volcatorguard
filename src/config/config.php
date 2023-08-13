@@ -1,32 +1,32 @@
 <?php
 
 /**
- * This file is part of StoneGuard,
+ * This file is part of VolcatorGuard,
  * a role & permission management solution for Laravel.
  *
  * @license MIT
- * @package Twedoo\Stone
+ * @package Twedoo\Volcator
  */
 
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Stone Space Model
+    | Volcator Space Model
     |--------------------------------------------------------------------------
     |
-    | This is the Module model used by Stone to create correct relations. Update
+    | This is the Module model used by Volcator to create correct relations. Update
     | the module if it is in a different namespace.
     |
     */
-    'spaces' => 'Twedoo\Stone\Application\Models\Spaces',
+    'spaces' => 'Twedoo\Volcator\Application\Models\Spaces',
 
     /*
     |--------------------------------------------------------------------------
-    | Stone Spaces Table
+    | Volcator Spaces Table
     |--------------------------------------------------------------------------
     |
-    | This is the modules table used by Stone to save roles to the database.
+    | This is the modules table used by Volcator to save roles to the database.
     |
     */
     'spaces_table' => 'spaces',
@@ -34,31 +34,31 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Stone Application Model
+    | Volcator Application Model
     |--------------------------------------------------------------------------
     |
-    | This is the Module model used by Stone to create correct relations. Update
+    | This is the Module model used by Volcator to create correct relations. Update
     | the module if it is in a different namespace.
     |
     */
-    'applications' => 'Twedoo\Stone\Application\Models\Applications',
+    'applications' => 'Twedoo\Volcator\Application\Models\Applications',
 
     /*
     |--------------------------------------------------------------------------
-    | Stone Applications Table
+    | Volcator Applications Table
     |--------------------------------------------------------------------------
     |
-    | This is the modules table used by Stone to save roles to the database.
+    | This is the modules table used by Volcator to save roles to the database.
     |
     */
     'applications_table' => 'applications',
 
     /*
     |--------------------------------------------------------------------------
-    | StoneGuard applications_user Table
+    | VolcatorGuard applications_user Table
     |--------------------------------------------------------------------------
     |
-    | This is the role_user table used by StoneGuard to save assigned roles to the
+    | This is the role_user table used by VolcatorGuard to save assigned roles to the
     | database.
     |
     */
@@ -67,10 +67,10 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | StoneGuard applications_module Table
+    | VolcatorGuard applications_module Table
     |--------------------------------------------------------------------------
     |
-    | This is the role_user table used by StoneGuard to save assigned roles to the
+    | This is the role_user table used by VolcatorGuard to save assigned roles to the
     | database.
     |
     */
@@ -78,115 +78,115 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Stone Module Model
+    | Volcator Module Model
     |--------------------------------------------------------------------------
     |
-    | This is the Module model used by Stone to create correct relations. Update
+    | This is the Module model used by Volcator to create correct relations. Update
     | the module if it is in a different namespace.
     |
     */
-    'module' => 'Twedoo\Stone\Organizer\Models\Stones',
+    'module' => 'Twedoo\Volcator\Organizer\Models\Volcators',
 
     /*
     |--------------------------------------------------------------------------
-    | Stone Modules Table
+    | Volcator Modules Table
     |--------------------------------------------------------------------------
     |
-    | This is the modules table used by Stone to save roles to the database.
+    | This is the modules table used by Volcator to save roles to the database.
     |
     */
     'modules_table' => 'modules',
 
     /*
     |--------------------------------------------------------------------------
-    | Stone Parameter Model
+    | Volcator Parameter Model
     |--------------------------------------------------------------------------
     |
-    | This is the Parameter model used by Stone to create correct relations. Update
+    | This is the Parameter model used by Volcator to create correct relations. Update
     | the parameter if it is in a different namespace.
     |
     */
-    'parameters' => 'Twedoo\Stone\Models\Parameters',
+    'parameters' => 'Twedoo\Volcator\Models\Parameters',
 
     /*
     |--------------------------------------------------------------------------
-    | Stone Parameters Table
+    | Volcator Parameters Table
     |--------------------------------------------------------------------------
     |
-    | This is the parameters table used by Stone to save roles to the database.
+    | This is the parameters table used by Volcator to save roles to the database.
     |
     */
     'parameters_table' => 'parameters',
 
     /*
     |--------------------------------------------------------------------------
-    | Stone Menuback Model
+    | Volcator Menuback Model
     |--------------------------------------------------------------------------
     |
-    | This is the Menuback model used by Stone to create correct relations. Update
+    | This is the Menuback model used by Volcator to create correct relations. Update
     | the menuback if it is in a different namespace.
     |
     */
-    'menuback' => 'Twedoo\Stone\Models\Menuback',
+    'menuback' => 'Twedoo\Volcator\Models\Menuback',
 
     /*
     |--------------------------------------------------------------------------
-    | Stone Menubacks Table
+    | Volcator Menubacks Table
     |--------------------------------------------------------------------------
     |
-    | This is the menubacks table used by Stone to save roles to the database.
+    | This is the menubacks table used by Volcator to save roles to the database.
     |
     */
     'menubacks_table' => 'menubacks',
 
     /*
     |--------------------------------------------------------------------------
-    | Stone Language Model
+    | Volcator Language Model
     |--------------------------------------------------------------------------
     |
-    | This is the Language model used by Stone to create correct relations. Update
+    | This is the Language model used by Volcator to create correct relations. Update
     | the Language if it is in a different namespace.
     |
     */
-    'Language' => 'Twedoo\Stone\Models\Languages',
+    'Language' => 'Twedoo\Volcator\Models\Languages',
 
     /*
     |--------------------------------------------------------------------------
-    | Stone Language Table
+    | Volcator Language Table
     |--------------------------------------------------------------------------
     |
-    | This is the languages table used by Stone to save roles to the database.
+    | This is the languages table used by Volcator to save roles to the database.
     |
     */
     'languages_table' => 'languages',
 
     /*
     |--------------------------------------------------------------------------
-    | StoneGuard Role Model
+    | VolcatorGuard Role Model
     |--------------------------------------------------------------------------
     |
-    | This is the Role model used by StoneGuard to create correct relations.  Update
+    | This is the Role model used by VolcatorGuard to create correct relations.  Update
     | the role if it is in a different namespace.
     |
     */
-    'role' => 'Twedoo\StoneGuard\Models\Role',
+    'role' => 'Twedoo\VolcatorGuard\Models\Role',
 
     /*
     |--------------------------------------------------------------------------
-    | StoneGuard Roles Table
+    | VolcatorGuard Roles Table
     |--------------------------------------------------------------------------
     |
-    | This is the roles table used by StoneGuard to save roles to the database.
+    | This is the roles table used by VolcatorGuard to save roles to the database.
     |
     */
     'roles_table' => 'roles',
 
     /*
     |--------------------------------------------------------------------------
-    | StoneGuard role foreign key
+    | VolcatorGuard role foreign key
     |--------------------------------------------------------------------------
     |
-    | This is the role foreign key used by StoneGuard to make a proper
+    | This is the role foreign key used by VolcatorGuard to make a proper
     | relation between permissions and roles & roles and users
     |
     */
@@ -197,7 +197,7 @@ return [
     | Application User Model
     |--------------------------------------------------------------------------
     |
-    | This is the User model used by StoneGuard to create correct relations.
+    | This is the User model used by VolcatorGuard to create correct relations.
     | Update the User if it is in a different namespace.
     |
     */
@@ -216,10 +216,10 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | StoneGuard role_user Table
+    | VolcatorGuard role_user Table
     |--------------------------------------------------------------------------
     |
-    | This is the role_user table used by StoneGuard to save assigned roles to the
+    | This is the role_user table used by VolcatorGuard to save assigned roles to the
     | database.
     |
     */
@@ -227,10 +227,10 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | StoneGuard user foreign key
+    | VolcatorGuard user foreign key
     |--------------------------------------------------------------------------
     |
-    | This is the user foreign key used by StoneGuard to make a proper
+    | This is the user foreign key used by VolcatorGuard to make a proper
     | relation between roles and users
     |
     */
@@ -238,21 +238,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | StoneGuard Permission Model
+    | VolcatorGuard Permission Model
     |--------------------------------------------------------------------------
     |
-    | This is the Permission model used by StoneGuard to create correct relations.
+    | This is the Permission model used by VolcatorGuard to create correct relations.
     | Update the permission if it is in a different namespace.
     |
     */
-    'permission' => 'Twedoo\StoneGuard\Models\Permission',
+    'permission' => 'Twedoo\VolcatorGuard\Models\Permission',
 
     /*
     |--------------------------------------------------------------------------
-    | StoneGuard Permissions Table
+    | VolcatorGuard Permissions Table
     |--------------------------------------------------------------------------
     |
-    | This is the permissions table used by StoneGuard to save permissions to the
+    | This is the permissions table used by VolcatorGuard to save permissions to the
     | database.
     |
     */
@@ -260,10 +260,10 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | StoneGuard permission_role Table
+    | VolcatorGuard permission_role Table
     |--------------------------------------------------------------------------
     |
-    | This is the permission_role table used by StoneGuard to save relationship
+    | This is the permission_role table used by VolcatorGuard to save relationship
     | between permissions and roles to the database.
     |
     */
@@ -271,10 +271,10 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | StoneGuard role_user Table
+    | VolcatorGuard role_user Table
     |--------------------------------------------------------------------------
     |
-    | This is the role_user table used by StoneGuard to save assigned roles to the
+    | This is the role_user table used by VolcatorGuard to save assigned roles to the
     | database.
     |
     */
@@ -282,14 +282,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | User Foreign key on StoneGuard's role_user Table (Pivot)
+    | User Foreign key on VolcatorGuard's role_user Table (Pivot)
     |--------------------------------------------------------------------------
     */
     'user_foreign_key' => 'user_id',
 
     /*
     |--------------------------------------------------------------------------
-    | Role Foreign key on StoneGuard's role_user Table (Pivot)
+    | Role Foreign key on VolcatorGuard's role_user Table (Pivot)
     |--------------------------------------------------------------------------
     */
     'role_foreign_key' => 'role_id',
