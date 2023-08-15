@@ -12,9 +12,10 @@ use Illuminate\Support\Facades\Config;
 use Laravel\Sanctum\HasApiTokens;
 use Twedoo\VolcatorGuard\Traits\VolcatorGuardUserTrait;
 
+
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
     use VolcatorGuardUserTrait;
 
     /**
